@@ -1,7 +1,7 @@
 {
     "name": "ntc-hi-js",
-    "version": "1.1.2",
-    "description": "A Node CommonJS compatible wrapper for the Name That Color library (ntc js) with hue and i18n - http://chir.ag/projects/ntc/",
+    "version": "2.0.0",
+    "description": "A Node CommonJS compatible wrapper for the Name That Color library (ntc js) with hue and i18n",
     "main": "./src/index.js",
     "scripts": {
         "test": "tape ./test/*.js"
