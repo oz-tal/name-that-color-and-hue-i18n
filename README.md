@@ -10,7 +10,7 @@ Colblindor's hue modification - https://www.color-blindness.com/color-name-hue/
 
 Install directly:
 ```
-npm install ntcjs --save
+npm install ntc-hi-js --save
 ```
 
 Or add to your package.json
