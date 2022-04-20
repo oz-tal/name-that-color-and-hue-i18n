@@ -6,9 +6,9 @@
 |               ntc js (Name that Color JavaScript)               |
 +-----------------------------------------------------------------+
 
-All the functions, code, lists etc. have been written specifically
-for the Name that Color JavaScript by Chirag Mehta unless otherwise
-specified.
+All the functions, code, lists etc. from the orignal code have been written
+specifically for the Name that Color JavaScript by Chirag Mehta. The hue feature
+has been written by Colblindor and the i18n support by Oz-Tal.
 
 This script is released under the: Creative Commons License:
 Attribution 2.5 http://creativecommons.org/licenses/by/2.5/
