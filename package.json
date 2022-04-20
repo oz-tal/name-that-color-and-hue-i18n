@@ -1,22 +1,22 @@
 {
-    "name": "ntcjs",
+    "name": "ntc-hi-js",
     "version": "1.1.2",
-    "description": "A Node CommonJS compatible wrapper for the Name That Color library (ntc js) - http://chir.ag/projects/ntc/",
+    "description": "A Node CommonJS compatible wrapper for the Name That Color library (ntc js) with hue and i18n - http://chir.ag/projects/ntc/",
     "main": "./src/index.js",
     "scripts": {
         "test": "tape ./test/*.js"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/pbojinov/name-that-color.git"
+        "url": "git+https://github.com/oz-tal/name-that-color-and-hue-i18n"
     },
-    "keywords": ["name", "that", "color", "hex", "rgb", "hue", "ntc", "ntc.js"],
+    "keywords": ["name", "that", "color", "hex", "rgb", "hue", "ntc", "ntc.js", "i18n"],
     "author": "Petar Bojinov (petarbojinov@gmail.com)",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/pbojinov/name-that-color/issues"
+        "url": "https://github.com/oz-tal/name-that-color-and-hue-i18n/issues"
     },
-    "homepage": "https://github.com/pbojinov/name-that-color#readme",
+    "homepage": "https://github.com/oz-tal/name-that-color-and-hue-i18n#readme",
     "devDependencies": {
         "tap": "^10.7.1",
         "tap-spec": "^4.1.1",

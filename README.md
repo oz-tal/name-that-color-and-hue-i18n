@@ -1,6 +1,9 @@
-# Name That Color
+# Name That Color And Hue with I18n
 
-A Node CommonJS compatible wrapper for the Name That Color library (ntc js) - http://chir.ag/projects/ntc/
+A Node CommonJS compatible wrapper for the ntc library with Colblindor's hue and an i18n hook.
+
+Original project: Name That Color library (ntc js) - http://chir.ag/projects/ntc/
+Colblindor's hue modification - https://www.color-blindness.com/color-name-hue/
 
 ## Installation
 
