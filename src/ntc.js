@@ -15,11 +15,11 @@ Attribution 2.5 http://creativecommons.org/licenses/by/2.5/
 
 Sample Usage:
 
-  <script type="text/javascript" src="ntc.js"></script>
+  <script type='text/javascript' src='ntc.js'></script>
 
-  <script type="text/javascript">
+  <script type='text/javascript'>
 
-    const n_match  = ntc.name("#6195ED")
+    const n_match  = ntc.name('#6195ED')
     n_rgb        = n_match[0] // This is the RGB value of the closest matching color
     n_name       = n_match[1] // This is the text string for the name of the match
     n_shade_rgb  = n_match[2] // This is the RGB value for the name of colors shade
@@ -34,7 +34,12 @@ Sample Usage:
 
 const ntc = {
 
+  locale: '',
+
   load_locale: function(locale) {
+    // names already loaded ?
+    if (locale === ntc.locale) { return }
+
     ntc.shades = require(`./shades/${locale}.json`)
     ntc.names  = require(`./colors/${locale}.json`)
 
@@ -45,23 +50,25 @@ const ntc = {
       hsl   = ntc.hsl(color)
       ntc.names[i].push(rgb[0], rgb[1], rgb[2], hsl[0], hsl[1], hsl[2])
     }
+
+    ntc.locale = locale
   },
 
-  name: function(color, locale = 'en') {
+  name: function(color, locale = ntc.locale) {
 
     // try to parse into #000000 format
     if (color.length % 3 === 0) {
-      color = "#" + color
+      color = '#' + color
     }
     if (color.length === 4) {
       color = color.split('').map((item) => {
-        if (item === "#") return item
+        if (item === '#') return item
         return item + item
-      }).join("")
+      }).join('')
     }
     // validate
     if (!/^#[0-9A-F]{6}$/i.test(color)) {
-      return ["#000000", "Invalid Color: " + color, "#000000", "", false]
+      return ['#000000', 'Invalid Color: ' + color, '#000000', '', false]
     }
 
     // set target locale, default to 'en'
@@ -73,8 +80,8 @@ const ntc = {
     let cl = df = -1
 
     for (let i = 0; i < ntc.names.length; i++) {
-      if(color === "#" + ntc.names[i][0]) {
-        return ["#" + ntc.names[i][0], ntc.names[i][1], ntc.shadergb(ntc.names[i][2]), ntc.names[i][2], true]
+      if(color === '#' + ntc.names[i][0]) {
+        return ['#' + ntc.names[i][0], ntc.names[i][1], ntc.shadergb(ntc.names[i][2]), ntc.names[i][2], true]
       }
 
       ndf1 = Math.pow(r - ntc.names[i][3], 2) + Math.pow(g - ntc.names[i][4], 2) + Math.pow(b - ntc.names[i][5], 2)
@@ -86,7 +93,7 @@ const ntc = {
       }
     }
 
-    return (cl < 0 ? ["#000000", "Invalid Color: " + color, "#000000", "", false] : ["#" + ntc.names[cl][0], ntc.names[cl][1], ntc.shadergb(ntc.names[cl][2]), ntc.names[cl][2], false])
+    return (cl < 0 ? ['#000000', 'Invalid Color: ' + color, '#000000', '', false] : ['#' + ntc.names[cl][0], ntc.names[cl][1], ntc.shadergb(ntc.names[cl][2]), ntc.names[cl][2], false])
   },
 
   // adopted from: Farbtastic 1.2
@@ -128,9 +135,9 @@ const ntc = {
   shadergb: function (shadename) {
     for (let i = 0; i < ntc.shades.length; i++) {
       if(shadename == ntc.shades[i][1])
-        return "#" + ntc.shades[i][0]
+        return '#' + ntc.shades[i][0]
     }
-    return "#000000"
+    return '#000000'
   },
   
   shades: require('./shades/en.json'),
@@ -138,5 +145,8 @@ const ntc = {
   names: require('./colors/en.json')
 
 }
+
+// load default locale before exporting
+ntc.load_locale('en')
 
 module.exports = ntc
