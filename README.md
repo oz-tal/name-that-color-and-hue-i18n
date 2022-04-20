@@ -3,12 +3,19 @@
 A Node CommonJS compatible wrapper for the ntc library with Colblindor's hue and an i18n hook.
 
 Original project: Name That Color library (ntc js) - http://chir.ag/projects/ntc/
+
 Colblindor's hue modification - https://www.color-blindness.com/color-name-hue/
 
 ## Installation
 
+Install directly:
 ```
 npm install ntcjs --save
+```
+
+Or add to your package.json
+```
+"ntc-hi-js": "^2.0.1"
 ```
 
 ## Getting Started
