@@ -15,7 +15,7 @@ npm i ntc-hi-js
 
 Or add to your package.json
 ```
-"ntc-hi-js": "^2.0.4"
+"ntc-hi-js": "^2.0.5"
 ```
 
 ## Getting Started
@@ -60,3 +60,13 @@ npm test
 ## Disclaimer
 
 All credit goes to [Chirag Mehta](http://chir.ag/about) for creating the original ntc.js library.
+
+## Contributing
+
+ntc-hi-js is an open source project and we encourage contributions.
+
+## To-do
+
+* Support more locales
+* Validate fr locale for the quality of some translations
+* Support for RGB, HSL and HSV formats has an input
