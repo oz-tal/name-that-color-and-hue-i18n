@@ -1,6 +1,6 @@
 # Name That Color And Hue with I18n
 
-A Node CommonJS compatible wrapper for the ntc library with Colblindor's hue and an i18n hook.
+A Node CommonJS compatible wrapper for the ntc library with Colblindor's hue and support for i18n.
 
 Original project: Name That Color library (ntc js) - http://chir.ag/projects/ntc/
 
@@ -65,8 +65,9 @@ All credit goes to [Chirag Mehta](http://chir.ag/about) for creating the origina
 
 ntc-hi-js is an open source project and we encourage contributions.
 
-## To-do
+## To-Do
 
 * Support more locales
-* Validate fr locale for the quality of some translations
-* Support for RGB, HSL and HSV formats has an input
+* Support for externally provided locale translations
+* Review fr locale for the quality of some translations
+* Support for RGB, HSL and HSV formats as an input
