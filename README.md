@@ -1,10 +1,6 @@
 # Name That Color And Hue with I18n
 
-A Node CommonJS compatible wrapper for the ntc library with Colblindor's hue and support for i18n.
-
-Original project: Name That Color library (ntc js) - http://chir.ag/projects/ntc/
-
-Colblindor's hue modification - https://www.color-blindness.com/color-name-hue/
+Convert hex, rgb, hsl, lch or cmyk color to a name and a shade with locale support.
 
 ## Installation
 
@@ -15,7 +11,7 @@ npm i ntc-hi-js
 
 Or add to your package.json
 ```
-"ntc-hi-js": "^2.0.5"
+"ntc-hi-js": "^3.0.0"
 ```
 
 ## Getting Started
@@ -23,12 +19,15 @@ Or add to your package.json
 ```javascript
 const ntc = require('ntc-hi-js')
 
-const n_match = ntc.name('#6195ED', 'fr')
-n_rgb         = n_match[0] // RGB value of the closest matching color
-n_name        = n_match[1] // string for the name of the match
-n_shade_rgb   = n_match[2] // RGB value for the name of colors shade
-n_shade_name  = n_match[3] // string for the name of colors shade
-n_exactmatch  = n_match[4] // True if exact color match, False if close-match
+const n_match = ntc.name('#6195ED', 'en')
+
+n_match.color.hex   // This is the RGB value of the closest matching color
+n_match.color.name  // This is the text string for the name of the match
+n_match.color.exact // True if exact color match, False if close-match
+
+n_match.shade.hex   // This is the RGB value for the name of colors shade
+n_match.shade.name  // This is the text string for the name of colors shade
+n_match.shade.exact // True if exact color match, False if close-match
 
 console.log(n_match) // [ '#6495ED', 'Cornflower Blue', false ]
 ```
@@ -61,6 +60,9 @@ npm test
 
 All credit goes to [Chirag Mehta](http://chir.ag/about) for creating the original ntc.js library.
 
+Some credit goes to [Colblindor](https://www.color-blindness.com/color-name-hue/) for his
+hue modification.
+
 ## Contributing
 
 ntc-hi-js is an open source project and we encourage contributions.
@@ -68,6 +70,5 @@ ntc-hi-js is an open source project and we encourage contributions.
 ## To-Do
 
 * Support more locales
-* Support for externally provided locale translations
+* Test and expand support for externally provided locales/dictionaries
 * Review fr locale for the quality of some translations
-* Support for RGB, HSL and HSV formats as an input

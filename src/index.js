@@ -1,3 +1,3 @@
-const ntc = require("./ntc");
+const ntc = require("./ntc")
 
-module.exports = ntc;
+module.exports = ntc
