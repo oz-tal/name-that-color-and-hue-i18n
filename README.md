@@ -11,7 +11,7 @@ npm i ntc-hi-js
 
 Or add to your package.json
 ```
-"ntc-hi-js": "^3.0.0"
+"ntc-hi-js": "^3.0.1"
 ```
 
 ## Getting Started
