@@ -1,6 +1,6 @@
 # Name That Color And Hue with I18n
 
-Convert hex, rgb, hsl, lch or cmyk color to a name and a shade with locale support.
+Convert hexadecimal, RGB, HSL, LCH or CMYK color to a name and a shade with i18n support.
 
 ## Installation
 

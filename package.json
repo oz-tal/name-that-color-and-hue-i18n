@@ -1,7 +1,7 @@
 {
   "name": "ntc-hi-js",
   "version": "3.0.0",
-  "description": "A Node CommonJS compatible wrapper for the Name That Color library (ntc js) with hue and i18n",
+  "description": "Convert hexadecimal, RGB, HSL, LCH or CMYK color to a name and a shade with i18n support.",
   "main": "./src/index.js",
   "scripts": {
     "test": "tape ./test/*.js"
