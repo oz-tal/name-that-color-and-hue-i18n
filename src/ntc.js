@@ -37,20 +37,32 @@ const ntc = {
   locale: '',
 
   load_locale: function(locale) {
-    // names already loaded ?
+    // locale already loaded?
     if (locale === ntc.locale) { return }
+
+    // fetch dictionaries 
+    Object.entries(ntc.dictionaries).forEach(entry => {
+      const [name, path]   = entry
+      ntc.dictionary[name] = require(`${path}/${locale}.json`)
+    })
 
     ntc.shades = require(`./shades/${locale}.json`)
     ntc.names  = require(`./colors/${locale}.json`)
 
-    let color, rgb, hsl
-    for (let i = 0; i < ntc.names.length; i++) {
-      color = '#' + ntc.names[i][0]
-      rgb   = ntc.rgb(color)
-      hsl   = ntc.hsl(color)
-      ntc.names[i].push(rgb[0], rgb[1], rgb[2], hsl[0], hsl[1], hsl[2])
-    }
+    // build rgb and hsl values
+    Object.entries(ntc.dictionary).forEach(entry => {
+      const [name, content] = entry
 
+      let color, rgb, hsl
+      for (let i = 0; i < content.length; i++) {
+        color = '#' + content[i][0]
+        rgb   = ntc.rgb(color)
+        hsl   = ntc.hsl(color)
+        content[i].push(rgb[0], rgb[1], rgb[2], hsl[0], hsl[1], hsl[2])
+      }
+    })
+
+    // save current locale so we don't rebuild it
     ntc.locale = locale
   },
 
@@ -74,26 +86,36 @@ const ntc = {
     // set target locale, default to 'en'
     ntc.load_locale(locale)
 
+    const result = {}
+
     const [r, g, b] = ntc.rgb(color)
     const [h, s, l] = ntc.hsl(color)
-    let ndf1 = ndf2 = ndf = 0
-    let cl = df = -1
 
-    for (let i = 0; i < ntc.names.length; i++) {
-      if(color === '#' + ntc.names[i][0]) {
-        return ['#' + ntc.names[i][0], ntc.names[i][1], ntc.shadergb(ntc.names[i][2]), ntc.names[i][2], true]
+    Object.entries(ntc.dictionary).forEach(entry => {
+      const [name, content] = entry
+
+      let ndf1 = ndf2 = ndf = 0
+      let cl = df = -1
+
+      for (let i = 0; i < content.length; i++) {
+        if(color === '#' + content[i][0]) {
+          result[name] = ['#' + content[i][0], content[i][1], content[i][2], true]
+          break
+        }
+
+        ndf1 = Math.pow(r - content[i][3], 2) + Math.pow(g - content[i][4], 2) + Math.pow(b - content[i][5], 2)
+        ndf2 = Math.abs(Math.pow(h - content[i][6], 2)) + Math.pow(s - content[i][7], 2) + Math.abs(Math.pow(l - content[i][8], 2))
+        ndf  = ndf1 + ndf2 * 2
+        if (df < 0 || df > ndf) {
+          df = ndf
+          cl = i
+        }
       }
 
-      ndf1 = Math.pow(r - ntc.names[i][3], 2) + Math.pow(g - ntc.names[i][4], 2) + Math.pow(b - ntc.names[i][5], 2)
-      ndf2 = Math.abs(Math.pow(h - ntc.names[i][6], 2)) + Math.pow(s - ntc.names[i][7], 2) + Math.abs(Math.pow(l - ntc.names[i][8], 2))
-      ndf  = ndf1 + ndf2 * 2
-      if (df < 0 || df > ndf) {
-        df = ndf
-        cl = i
-      }
-    }
+      result[name] = (cl < 0 ? ['#000000', 'Invalid Color: ' + color, '#000000', '', false] : ['#' + content[cl][0], content[cl][1], false])
+    })
 
-    return (cl < 0 ? ['#000000', 'Invalid Color: ' + color, '#000000', '', false] : ['#' + ntc.names[cl][0], ntc.names[cl][1], ntc.shadergb(ntc.names[cl][2]), ntc.names[cl][2], false])
+    return result
   },
 
   // adopted from: Farbtastic 1.2
@@ -132,17 +154,16 @@ const ntc = {
     return [parseInt('0x' + color.substring(1, 3)), parseInt('0x' + color.substring(3, 5)),  parseInt('0x' + color.substring(5, 7))]
   },
   
-  shadergb: function (shadename) {
-    for (let i = 0; i < ntc.shades.length; i++) {
-      if(shadename == ntc.shades[i][1])
-        return '#' + ntc.shades[i][0]
-    }
-    return '#000000'
-  },
-  
   shades: require('./shades/en.json'),
 
-  names: require('./colors/en.json')
+  names: require('./colors/en.json'),
+
+  dictionary: {},
+
+  dictionaries: {
+    shades: './shades',
+    colors: './colors'
+  }
 
 }
 
