@@ -69,6 +69,11 @@ const ntc = {
   },
 
   name: (color, locale = ntc.current_locale) => {
+    if (!chroma.valid(color)) {
+      console.error(`'${color}' is not in a recognized color format`)
+      return
+    }
+
     // initial locale is 'en'
     ntc.load_locale(locale)
 
@@ -110,4 +115,5 @@ const ntc = {
 
 // load default locale before exporting
 ntc.load_locale('en')
+
 module.exports = ntc
