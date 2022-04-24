@@ -36,10 +36,10 @@ Sample Usage:
 
 */
 
-const ntc = {
-  // chroma-js for input processing and deltaE calculations
-  chroma: require("chroma-js"),
+// chroma-js for input processing and deltaE calculations
+const chroma = require("chroma-js")
 
+const ntc = {
   current_locale: '',
   fallback_locale: 'en',
   dictionary: {},
@@ -68,8 +68,8 @@ const ntc = {
     ntc.current_locale = locale
   },
 
-  name: (color, locale = ntc.locale) => {
-    // set target locale, default to 'en'
+  name: (color, locale = ntc.current_locale) => {
+    // initial locale is 'en'
     ntc.load_locale(locale)
 
     const result = {}
@@ -80,7 +80,7 @@ const ntc = {
 
       let bestDeltaE  = -1
       list.find(entry => {
-        const entryDeltaE = ntc.chroma.deltaE(color, entry[0])
+        const entryDeltaE = chroma.deltaE(color, entry[0])
 
         if (bestDeltaE < 0 || bestDeltaE > entryDeltaE) {
           if (entryDeltaE === 0) {
@@ -110,5 +110,4 @@ const ntc = {
 
 // load default locale before exporting
 ntc.load_locale('en')
-
 module.exports = ntc

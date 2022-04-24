@@ -11,7 +11,7 @@ npm i ntc-hi-js
 
 Or add to your package.json
 ```
-"ntc-hi-js": "^3.0.1"
+"ntc-hi-js": "^3.0.2"
 ```
 
 ## Getting Started
@@ -30,6 +30,23 @@ n_match.shade.name  // This is the text string for the name of colors shade
 n_match.shade.exact // True if exact color match, False if close-match
 
 console.log(n_match) // [ '#6495ED', 'Cornflower Blue', false ]
+```
+
+## Example
+
+Supported formats:
+```javascript
+ntc.name('619')                     // hex
+ntc.name('#619')                    // hex
+ntc.name('6195ED')                  // hex
+ntc.name('#6195ED')                 // hex
+ntc.name(0xff3399)                  // hex
+ntc.name(16777215)                  // int
+ntc.name([97, 149, 237])            // rgb
+ntc.name({ r:97, g:149, g:237})     // rgb
+ntc.name({ h:120, s:1, l:0.75})     // hsl
+ntc.name({ l:80, c:25, h:200 })     // lch
+ntc.name({ c:1, m:0.5, y:0, k:0.2}) // cmyk
 ```
 
 ## Live Demo
