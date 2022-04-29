@@ -1,6 +1,6 @@
 {
   "name": "ntc-hi-js",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "Convert hexadecimal, RGB, HSL, LCH or CMYK color to a name and a shade with i18n support.",
   "main": "./src/index.js",
   "scripts": {

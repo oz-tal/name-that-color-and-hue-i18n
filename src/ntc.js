@@ -3,7 +3,7 @@
 +-----------------------------------------------------------------+
 |   Created by Chirag Mehta - http://chir.ag/tech/download/ntc    |
 |-----------------------------------------------------------------|
-|               ntc js (Name that Color JavaScript)               |
+|      ntc hi js (Name that Color & Hue w/ I18n JavaScript)       |
 +-----------------------------------------------------------------+
 
 All the functions, code, lists etc. from the orignal code have been written
@@ -40,31 +40,31 @@ Sample Usage:
 const chroma = require("chroma-js")
 
 const ntc = {
-  current_locale: '',
+  current_locale: 'en',
   fallback_locale: 'en',
-  dictionary: {},
-  dictionaries: {
+  dictionaries: {},
+  dictionaries_path: {
     shade: './shades',
     color: './colors'
   },
 
-  load_locale: (locale) => {
-    // locale already loaded
-    if (locale === ntc.current_locale) { return }
+  build_dictionaries: (locale = ntc.current_locale) => {
+    // reset dictionaries
+    ntc.dictionaries = {}
 
-    Object.entries(ntc.dictionaries).forEach(entry => {
+    Object.entries(ntc.dictionaries_path).forEach(entry => {
       const [name, path] = entry
 
       try {
-        ntc.dictionary[name] = require(`${path}/${locale}.json`)
+        ntc.dictionaries[name] = require(`${path}/${locale}.json`)
       } catch (error) {
-        ntc.dictionary[name] = require(`${path}/${ntc.fallback_locale}.json`)
+        ntc.dictionaries[name] = require(`${path}/${ntc.fallback_locale}.json`)
 
         console.warn(`ntc: missing '${name}' table for '${locale}' locale, '${ntc.fallback_locale}' locale will be used as fallback`)
       }
     })
 
-    // track currently loaded locale
+    // track currently built locale
     ntc.current_locale = locale
   },
 
@@ -74,36 +74,34 @@ const ntc = {
       return
     }
 
-    // initial locale is 'en'
-    ntc.load_locale(locale)
+    if (locale != ntc.current_locale) { ntc.build_dictionaries(locale) }
 
     const result = {}
 
-    // return a match for each table
-    Object.entries(ntc.dictionary).forEach(table => {
+    // return a match from each dictonary
+    Object.entries(ntc.dictionaries).forEach(table => {
       const [name, list] = table
 
       let bestDeltaE  = -1
       list.find(entry => {
+        // determine how close the color is
         const entryDeltaE = chroma.deltaE(color, entry[0])
 
+        // replace the match if it's better then the current best
         if (bestDeltaE < 0 || bestDeltaE > entryDeltaE) {
+          result[name] = {
+            hex:   '#' + entry[0],
+            name:  entry[1]
+          }
+
           if (entryDeltaE === 0) {
             // exact match
-            result[name] = {
-              hex:   '#' + entry[0],
-              name:  entry[1],
-              exact: true
-            }
+            result[name].exact = true
             return true
           } else {
             // closest match
             bestDeltaE   = entryDeltaE
-            result[name] = {
-              hex:   '#' + entry[0],
-              name:  entry[1],
-              exact: false
-            }
+            result[name].exact = false
           }
         }
       })
@@ -113,7 +111,7 @@ const ntc = {
   }
 }
 
-// load default locale before exporting
-ntc.load_locale('en')
+// build default locale before exporting
+ntc.build_dictionaries()
 
 module.exports = ntc
