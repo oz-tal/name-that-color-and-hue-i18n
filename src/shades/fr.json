@@ -1,12 +1,22 @@
 [
 ["FF0000", "Rouge"],
+["A52A2A", "Brun"],
+["D2B48C", "Beige"],
 ["FFA500", "Orange"],
+["FFD700", "Or"],
 ["FFFF00", "Jaune"],
+["00FF00", "Lime"],
+["808000", "Olive"],
 ["008000", "Vert"],
+["008080", "Sarcelle"],
+["00FFFF", "Cyan"],
 ["0000FF", "Bleu"],
-["EE82EE", "Violette"],
-["A52A2A", "Marron"],
-["000000", "Noir"],
+["000080", "Marine"],
+["800080", "Violet"],
+["FF00FF", "Magenta"],
+["FFC0CB", "Rose"],
 ["808080", "Gris"],
-["FFFFFF", "Blanc"]
+["C0C0C0", "Argent"],
+["FFFFFF", "Blanc"],
+["000000", "Noir"]
 ]

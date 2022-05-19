@@ -4,7 +4,7 @@ Convert hexadecimal, RGB, HSL, LCH or CMYK color to a name and a shade with i18n
 
 ntc-hi-js is a complete overhaul of [Chirag Mehta](http://chir.ag/about) and [Colblindor](https://www.color-blindness.com/color-name-hue/) work.
 
-ntc-hi-js leverage the powerful [chroma.js](https://gka.github.io/chroma.js/) library to support a wider range of formats and offer a more accurate matching.
+ntc-hi-js leverage the powerful [chroma.js](https://gka.github.io/chroma.js/) library to support a wider range of formats and offer more accurate matching.
 
 ## Installation
 
@@ -15,7 +15,7 @@ npm i ntc-hi-js
 
 Or add to your package.json
 ```
-"ntc-hi-js": "^3.1.0"
+"ntc-hi-js": "^3.2.0"
 ```
 
 ## Getting Started
@@ -91,9 +91,12 @@ The json object for a locale is a list of hex/name combos.
 ]
 ```
 
-Once this is setup, you must register your dictionary path and launch a rebuild.
+Once this is setup, you must register your dictionary path and launch a rebuild. The example also include the usage of a absolute path, which might be handy for moving the object around modules.
 ```javascript
+// with a relative path
 ntc.dictionaries_path.my_dictionary = './my_dictionary'
+// with an absolute path
+ntc.dictionaries_path.my_dictionary = require('path').resolve('my_dictionary')
 ntc.build_dictionaries()
 ```
 
