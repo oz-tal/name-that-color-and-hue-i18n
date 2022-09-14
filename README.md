@@ -49,7 +49,7 @@ ntc.name('#6195ED')                 // hex
 ntc.name(0xff3399)                  // hex
 ntc.name(16777215)                  // int
 ntc.name([97, 149, 237])            // rgb
-ntc.name({ r:97, g:149, g:237})     // rgb
+ntc.name({ r:97, g:149, b:237})     // rgb
 ntc.name({ h:120, s:1, l:0.75})     // hsl
 ntc.name({ l:80, c:25, h:200 })     // lch
 ntc.name({ c:1, m:0.5, y:0, k:0.2}) // cmyk
