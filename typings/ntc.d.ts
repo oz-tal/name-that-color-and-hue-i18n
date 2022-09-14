@@ -54,8 +54,8 @@ export type Ntc = {
     dictionaries: NtcDictionary;
     dictionaries_path: DictionaryPath;
 
-    build_dictionaries(locale: string): void;
-    name(color: ColorResolvable, locale: string): NtcColor;
+    build_dictionaries(locale: string?): void;
+    name(color: ColorResolvable, locale: string?): NtcColor;
 }
 
 declare const ntc: Ntc;
